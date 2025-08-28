@@ -28,10 +28,10 @@ export async function sendMessage(to, message) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      messaging_product: "whatsapp",
-      to,
-      type: "text",
-      text: { body: message },
+      "messaging_product": "whatsapp",
+      "to": "5492233454259",
+      "type": "text",
+      "text": { "body": "HOLA ESTOY ANDANDO!" }
     }),
   });
 
