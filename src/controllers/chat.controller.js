@@ -32,8 +32,7 @@ export async function postChat(req, res) {
     if (decision.name === 'create_cart' && cartId === 0) {
       const items = Array.isArray(decision.args?.items) ? decision.args.items : [];
       const resp = await createCart(items);
-      cartId = resp.cart.id; //aca se guarda el id del carrito
-      console.log(cartId);
+      cartId = resp.cart.id;
       return res.json({ reply: formatCart(resp) });
     } else {
       decision.name = 'update_cart';
