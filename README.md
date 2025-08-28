@@ -43,8 +43,7 @@ src/
    npm install
 
 3. Configurar variables de entorno (.env):
-  GOOGLE_API_KEY=AIzaSyBIHxyET8z0EkwdEI0XSkYn3z5BzfNE_S0 
-  (o generar una propia en [https://aistudio.google.com/app/apikey])
+  GOOGLE_API_KEY= generar una propia en [https://aistudio.google.com/app/apikey]
   BACKEND_URL=https://api-laburen.onrender.com
 
 4. Iniciar:
