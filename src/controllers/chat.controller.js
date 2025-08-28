@@ -1,16 +1,8 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { runLLM } from '../services/llm.service.js';
 import { listProducts, createCart, updateCart } from '../services/backend.service.js';
 import { formatProducts, formatCart } from '../utils/formatters.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 var cartId = 0;
-
-export function getUI(req, res) {
-  res.sendFile('index.html', { root: path.join(__dirname, '../ui') });
-}
 
 export async function postChat(req, res) {
   const message = String(req.body?.message ?? '').trim();
