@@ -1,5 +1,10 @@
 import { sendMessage } from "../services/whatsapp.service.js";
 import { runLLM } from "../services/llm.service.js"
+import { listProducts } from "../services/backend.service.js"
+import { createCart } from "../services/backend.service.js"
+import { updateCart } from "../services/backend.service.js"
+import { formatCart } from "../utils/formatters.js"
+import { formatProducts } from "../utils/formatters.js"
 
 let cartId = 0;
 
@@ -18,7 +23,6 @@ export async function incomingMessageController(req, res) {
             return res.sendStatus(200);
         }
 
-        // 🚀 Lógica de IA
         const decision = await runLLM(text);
 
         if (decision.kind === "text" || !decision.name) {
