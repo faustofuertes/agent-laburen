@@ -39,9 +39,9 @@ export async function updateCart(cartId, items) {
   });
 
   if (!res.ok) {
-    let err;
-    try { err = await res.json(); } catch { err = {}; }
-    throw new Error(`PATCH /carts/${cartId} → ${res.status}: ${err.error || "Unknown error"}`);
+    let error;
+    try { error = await res.json(); } catch { error = {}; }
+    throw new Error(`PATCH /carts/${cartId} → ${res.status}: ${error.error || "Unknown error"}`);
   }
 
   return await res.json();

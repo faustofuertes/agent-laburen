@@ -6,7 +6,7 @@ import { updateCart } from "../services/backend.service.js"
 import { formatCart } from "../utils/formatters.js"
 import { formatProducts } from "../utils/formatters.js"
 
-let cartId = 0;
+var cartId = 0;
 
 export async function incomingMessageController(req, res) {
     try {
@@ -16,7 +16,7 @@ export async function incomingMessageController(req, res) {
         const from = msg.from;
         const text = msg.text?.body?.trim() || "";
 
-        console.log("📩 Mensaje recibido:", from, text);
+        console.log("Message received:", from, text);
 
         if (!text) {
             await sendMessage(from, "Decime qué querés ver o comprar.");
@@ -59,8 +59,11 @@ export async function incomingMessageController(req, res) {
         await sendMessage(from, "Por ahora solo puedo listar productos o manejar carritos.");
         res.sendStatus(200);
 
-    } catch (err) {
-        console.error("❌ Error en webhook:", err);
-        res.sendStatus(500);
+    } catch (error) {
+        console.error('[POST /chat]', error);
+        if (error?.status === 429) {
+            return res.json({ reply: 'Sin cuota de IA por hoy.' });
+        }
+        return res.status(502).json({ reply: 'No pude procesar tu pedido ahora.' });
     }
 }

@@ -12,7 +12,7 @@ export async function postChat(req, res) {
     const decision = await runLLM(message);
 
     if (decision.kind === 'text' || !decision.name) {
-      return res.json({ reply: decision.text || 'Puedo listar productos o crear/modificar un carrito.' });
+      return res.json({ reply: decision.text || 'Puedo listar productos o manejar carritos.' });
     }
 
     if (decision.name === 'list_products') {
@@ -41,9 +41,9 @@ export async function postChat(req, res) {
     }
 
     return res.json({ reply: 'Por ahora solo puedo listar productos o manejar carritos.' });
-  } catch (e) {
-    console.error('[POST /chat]', e);
-    if (e?.status === 429) {
+  } catch (error) {
+    console.error('[POST /chat]', error);
+    if (error?.status === 429) {
       return res.json({ reply: 'Sin cuota de IA por hoy.' });
     }
     return res.status(502).json({ reply: 'No pude procesar tu pedido ahora.' });

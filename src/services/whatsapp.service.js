@@ -21,7 +21,7 @@ export async function sendMessage(to, body) {
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    console.error("❌ Error enviando mensaje:", err);
+    const error = await res.text();
+    console.error("Error sending message.", error);
   }
 }
