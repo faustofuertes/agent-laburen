@@ -46,6 +46,24 @@
       letter-spacing: .2px;
     }
 
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+
+    .guide {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    .guide li {
+      margin: 4px 0;
+    }
+
     .suggestions {
       display: flex;
       flex-wrap: wrap;
@@ -202,6 +220,19 @@
 
 <body>
   <div class="card">
+
+    <!-- Guía rápida -->
+    <h2>ℹ️ Info</h2>
+    <ul class="guide">
+      <li>Siempre que quieras <strong>comprar o agregar</strong> algo al carrito debés indicar el
+        <strong>ID</strong> y la <strong>cantidad</strong>.
+        Ejemplos:
+        <em>“quiero comprar el producto con id 5 en 1 unidad”</em>
+        <em>“quiero agregar el producto con id 4 en 3 unidades”</em>.
+      </li>
+    </ul>
+
+
     <h1>Chat con mi agente</h1>
 
     <!-- Sugerencias iniciales -->
@@ -231,9 +262,7 @@
       "¿Quién sos?",
       "¿Qué vendés?",
       "Mostrame los productos",
-      "Quiero crear un carrito",
-      "Editá mi carrito",
-      "Ayuda / ¿Qué puedo hacer?"
+      "¿Qué podes hacer?"
     ];
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -244,7 +273,6 @@
     inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') send(); });
 
     function renderSuggestions() {
-      // Si ya hubo mensajes, no mostramos sugerencias
       if (chatEl.children.length > 0) { suggEl.style.display = 'none'; return; }
       suggEl.innerHTML = '';
       SUGGESTIONS.forEach(text => {
@@ -254,7 +282,7 @@
         chip.textContent = text;
         chip.addEventListener('click', () => {
           inputEl.value = text;
-          send(); // envía directo
+          send();
         });
         suggEl.appendChild(chip);
       });
@@ -279,7 +307,7 @@
     async function send() {
       const msg = inputEl.value.trim();
       if (!msg) return;
-      hideSuggestions(); // ocultamos sugerencias al primer envío
+      hideSuggestions();
 
       append('you', msg);
       inputEl.value = '';
@@ -287,7 +315,8 @@
 
       try {
         const res = await fetch('/chat', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: msg })
         });
         const data = await res.json();

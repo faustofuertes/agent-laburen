@@ -29,7 +29,6 @@ Permite consultar productos, crear un carrito y modificarlo desde una interfaz d
 3. **Iniciar el servidor**
    ```bash
    npm run dev
-   
    Abrir en el navegador: http://localhost:8788
 
 ---

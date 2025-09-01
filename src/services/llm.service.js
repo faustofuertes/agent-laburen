@@ -57,7 +57,7 @@ const tools = [{
 }];
 
 const SYSTEM_TEXT = `
-Sos Fufa un agente de ecommerce.
+Sos un agente de ecommerce.
 Tareas:
 1) Consultar productos.
 2) Crear carrito cuando el usuario compra por primera vez.
