@@ -43,11 +43,11 @@ export async function incomingMessageController(req, res) {
             cartId = resp.cart.id;
             await sendMessage(from, formatCart(resp));
             return res.sendStatus(200);
-        } else {
+        } else if (decision.name === "create_cart" && cartId != 0) {
             decision.name = 'update_cart';
         }
 
-        if (decision.name === "update_cart") {
+        if (decision.name === "update_cart" && cartId != 0) {
             const items = Array.isArray(decision.args?.items) ? decision.args.items : [];
             if (!cartId || items.length === 0) {
                 await sendMessage(from, "Necesito el ID del carrito y al menos un item para actualizar.");
@@ -56,6 +56,8 @@ export async function incomingMessageController(req, res) {
             const resp = await updateCart(cartId, items);
             await sendMessage(from, formatCart(resp));
             return res.sendStatus(200);
+        } else if (decision.name === "update_cart" && cartId == 0) {
+            decision.name = 'create_cart';
         }
 
         await sendMessage(from, "Por ahora solo puedo listar productos o manejar carritos.");
