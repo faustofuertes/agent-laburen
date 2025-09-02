@@ -43,6 +43,8 @@ export async function incomingMessageController(req, res) {
             cartId = resp.cart.id;
             await sendMessage(from, formatCart(resp));
             return res.sendStatus(200);
+        } else {
+            decision.name = 'update_cart';
         }
 
         if (decision.name === "update_cart") {
