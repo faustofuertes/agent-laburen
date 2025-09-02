@@ -14,7 +14,7 @@ export async function sendMessage(to, body) {
     },
     body: JSON.stringify({
       messaging_product: "whatsapp",
-      to: 54223153454259,
+      to: 54223155198515,
       type: "text",
       text: { body }
     }),
