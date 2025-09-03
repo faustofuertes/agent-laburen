@@ -62,7 +62,6 @@ export async function incomingMessageController(req, res) {
 
         await sendMessage(from, "Por ahora solo puedo listar productos o manejar carritos.");
         res.sendStatus(200);
-
     } catch (error) {
         console.error('[POST /chat]', error);
         if (error?.status === 429) {
